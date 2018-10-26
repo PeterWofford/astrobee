@@ -16,16 +16,9 @@
 <!-- permissions and limitations under the License.                          -->
 
 <launch>
-  <arg name="world"/>
-  <!-- Description is based on the world being simulated / launched -->
-  <param if="$(eval arg('world')=='granite')" name="/granite/robot_description"
-    textfile="$(find astrobee_granite)/urdf/model.urdf" />
-  <param if="$(eval arg('world')=='iss')" name="/iss/robot_description"
-    textfile="$(find astrobee_iss)/urdf/model.urdf" />
-  <param if="$(eval arg('world')!='mgtf')" name="/dock/robot_description"
-    textfile="$(find astrobee_dock)/urdf/model.urdf" />
-  <!-- Make ROS aware of the ZR model -->
-  <param name="/ring/robot_description" textfile="$(find zr_ring)/urdf/model.urdf" />
-  <!-- We must publish global transforms in case no robot has been spawned -->
-  <node name="global_transforms" pkg="framestore" type="global_transforms" output="screen"/>
+  <arg name="ns"/>
+  <arg name="pose"/>
+  <node unless="$(eval arg('ns')=='')"
+        name="spawn_ring" pkg="astrobee_gazebo" type="spawn_model"
+        args="-param /ring/robot_description -urdf -model $(arg ns) -pose $(arg pose)" />
 </launch>

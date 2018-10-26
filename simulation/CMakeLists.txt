@@ -36,6 +36,7 @@ catkin_package(
     gazebo_model_plugin_laser
     gazebo_model_plugin_flashlight_front
     gazebo_model_plugin_flashlight_aft
+    gazebo_model_plugin_ring
     gazebo_sensor_plugin_imu
     gazebo_sensor_plugin_nav_cam
     gazebo_sensor_plugin_dock_cam
@@ -232,6 +233,25 @@ create_library(
     src/gazebo_model_plugin_laser
   TARGET
     gazebo_model_plugin_laser
+  LIBS
+    ${GAZEBO_LIBRARIES}
+    ${catkin_LIBRARIES}
+    astrobee_gazebo
+  INC
+    ${GAZEBO_INCLUDE_DIRS}
+    ${EIGEN3_INCLUDE_DIRS}
+    ${catkin_INCLUDE_DIRS}
+  DEPS
+    ff_util
+    ff_hw_msgs
+)
+
+# Create a model plugin for the Zero Robotics ring
+create_library(
+  DIR
+    src/gazebo_model_plugin_ring
+  TARGET
+    gazebo_model_plugin_ring
   LIBS
     ${GAZEBO_LIBRARIES}
     ${catkin_LIBRARIES}
