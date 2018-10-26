@@ -24,3 +24,8 @@ project(description)
 catkin_package()
 
 install(DIRECTORY urdf DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+FetchContent_Declare(media
+    URL https://github.com/PeterWofford/astrobee_media/archive/v0.0.3-zr.tar.gz
+    URL_HASH SHA1=5216d5a5273931595abb39bfdda28c6c5a83b26c
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/media
+  )
